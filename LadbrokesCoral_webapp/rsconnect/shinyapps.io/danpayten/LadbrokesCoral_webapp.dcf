@@ -1,0 +1,12 @@
+name: LadbrokesCoral_webapp
+title: LadbrokesCoral_webapp
+username:
+account: danpayten
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 934801
+bundleId: 2093612
+url: https://danpayten.shinyapps.io/LadbrokesCoral_webapp/
+when: 1558190724.74543
+asMultiple: FALSE
+asStatic: FALSE

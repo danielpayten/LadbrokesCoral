@@ -1,0 +1,2 @@
+load("/Users/danielpayten/Code Projects/LadbrokesCoral/data/processed/store_locations.RDS")
+readRDS("/Users/danielpayten/Code Projects/LadbrokesCoral/data/processed/store_locations.RDS")
