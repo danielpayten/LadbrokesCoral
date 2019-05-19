@@ -86,6 +86,7 @@ ui =  basicPage(
 
 server <- function(input, output, session) {
 
+
 ########## Render the frequency table
 
   # Render the table showing the proportion of Ladbrokes stores which have a coral store within their radius
@@ -98,10 +99,13 @@ server <- function(input, output, session) {
     ladbrokes_distance = ladbrokes_distance %>%
       dplyr::group_by(within_x) %>%
       dplyr::summarise (n = n()) %>%
-      dplyr::mutate(freq = n / sum(n))
+      dplyr::mutate(freq = (n / sum(n))*100)
 
     # Rename the columns of the frequency table, so that it is pretty for the user interface
     colnames(ladbrokes_distance) = c("Ladbrokes stores","Count","Proportion")
+
+    # Correct the display to a percentage
+    ladbrokes_distance$Proportion = paste(as.character(round(ladbrokes_distance$Proportion,1)),"%")
 
     # Actually display the table, so that it is stored as an output and can be put on the web app page.
     ladbrokes_distance
