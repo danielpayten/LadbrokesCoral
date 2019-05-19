@@ -27,6 +27,9 @@ postcode_input_file = "./data/raw/ONS_postcode_centroids.csv"
 # Output file, with geotagged stores
 store_locations_all_output_file = "./data/processed/store_locations.RDS"
 
+# Output file, with geotagged stores (user friendly CSV)
+store_locations_all_csv = "./data/processed/store_locations_all.csv"
+
 
 
 ############# Load in data
@@ -101,9 +104,19 @@ spatial_store_locations_all = sp::SpatialPointsDataFrame(
                                 coords = select(store_locations, "X", "Y") ,     #select coordinates from dataframe
                                 data = select(store_locations, -c("X","Y")),   #select all but coordinates (everything else)
                                 proj4string = sp::CRS("+init=epsg:4326"))
+# An output required of this exercise is the full set of stores, geocoded.
+# Here, we assemble this data.
+store_locations_all = cbind(spatial_store_locations_all@data,spatial_store_locations_all@coords) %>%
+  dplyr::select(-LicenceStatus,-StatusDate,-id) %>%
+  dplyr::rename(Latitude=Y,Longitude=X)
 
+
+###### Store data
 # save the spatial dataframe
 saveRDS(spatial_store_locations_all,file = store_locations_all_output_file)
+
+# save the geocoded output file
+write.csv(store_locations_all, file =store_locations_all_csv,na = "")
 
 
 ############# Cleanup

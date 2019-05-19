@@ -20,3 +20,13 @@ rm(list=ls())
 source("./src/Import_Locations.R")
 source("./src/Geotag_Locations.R")
 source("./src/Distance_Calculation.R")
+
+
+############# Output 1) Interactive map
+runApp('LadbrokesCoral_webapp')
+
+############# Output 2) Dataset
+# Can be opened from "./data/processed/store_locations_all.csv"
+
+
+

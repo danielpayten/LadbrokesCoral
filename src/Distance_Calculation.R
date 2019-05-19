@@ -72,6 +72,8 @@ distance_matrix_ladbrokes_coral  = sp::spDists(spatial_store_locations_all[spati
   raw_distance$id = as.numeric(row.names(raw_distance))
   raw_distance = raw_distance %>% mutate(within_500m = ifelse(distance_to_coral_min <= 0.5, TRUE, FALSE))
 
+####### Store data
+
   # For conveniance, we also attach this distance data to the full set  of information about each ladbrokes store
   # Note: we source this information from the spatial dataframe
   ladbrokes_distance = spatial_store_locations_all@data %>%
@@ -79,6 +81,7 @@ distance_matrix_ladbrokes_coral  = sp::spDists(spatial_store_locations_all[spati
                         dplyr::left_join(raw_distance,by="id")
 
   remove(raw_distance)
+
 
   # We now calculate the proportion of Ladbrokes stores which have a coral within 500m
   ladbrokes_distance %>%
